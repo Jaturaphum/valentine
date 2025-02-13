@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: url(https://subtlepatterns.com/patterns/noise_lines.png);
+            font-family: 'Pacifico', cursive;
+            color: #fff;
+            margin: 0;
+            overflow: hidden; /* ล็อกไม่ให้เลื่อน */
+        }
+
+        .bgoverlay {
+            background: rgb(163 12 137 / 87%);
+            position: fixed; /* เปลี่ยนเป็น fixed */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 100vh; /* ทำให้เต็มหน้าจอ */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10; /* เพิ่ม z-index เพื่อให้แน่ใจว่ามันอยู่ด้านบน */
+        }
+
+        .container {
+            position: relative;
+            width: 320px;
+            text-align: center;
+        }
+
+        .ico {
+            display: block;
+            width: 320px;
+            height: 320px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.4s ease;
+        }
+
+        .open .ico {
+            animation: open 4s forwards;
+            transform: scale(10);
+        }
+
+        .ico .title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 4;
+            font-size: 50px;
+            color: #fff;
+            text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .open .ico .title {
+            opacity: 0;
+            transition: opacity 0.3s ease, top 0.3s ease;
+            top: -100px;
+        }
+
+        .ico:before, .ico:after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            font-size: 20em;
+            content: '\f004';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .ico:before {
+            color: #ff4081;
+            z-index: 3;
+        }
+
+        .ico:after {
+            color: #ff4081;
+            animation: explode 4s infinite;
+        }
+
+        .endtext {
+            opacity: 0;
+            position: absolute;
+            top: -100px;
+            width: 100%;
+            transition: opacity 0.5s ease, top 0.5s ease;
+        }
+
+        .open .endtext {
+            top: 0;
+            opacity: 1;
+            animation: show 5s forwards;
+        }
+
+        .endtext .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            color: #fff;
+        }
+
+        .endtext h1, .endtext h2, .endtext h3 {
+            text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .endtext h1 {
+            font-size: 25px;
+        }
+
+        .endtext h2 {
+            font-size: 30px;
+        }
+
+        .endtext h3 {
+            font-size: 20px;
+        }
+
+        @keyframes explode {
+            from {
+                transform: scale(1);
+                opacity: 1;
+            }
+            to {
+                transform: scale(1.6);
+                opacity: 0;
+            }
+        }
+
+        @keyframes open {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(10);
+            }
+        }
+
+        @keyframes show {
+            from {
+                opacity: 0;
+                top: -100px;
+            }
+            to {
+                opacity: 1;
+                top: 0;
+            }
+        }
+    </style>
+    <title>Valentine's Day</title>
+</head>
+<body>
+    <div class="bgoverlay">
+        <div class="container">
+            <span class="ico">
+                <span class="title">Click Me</span>
+            </span>
+            <div class="endtext">
+                <h1>🤍Happy Valentine's Day🤍</h1>
+                <h2>I wish you tomorrow in this world of love that will be with you forever.</h2>
+                <h2>May this year bring you good times.😊</h2>
+                <h3>~14/02/2025~</h3>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const title = document.querySelector(".title");
+            const container = document.querySelector(".container");
+            const close = document.querySelector(".close");
+            const body = document.body;
+
+            title.addEventListener("click", function () {
+                container.classList.add("open");
+                body.style.overflow = 'hidden'; // ปิดการเลื่อน
+            });
+
+            close.addEventListener("click", function () {
+                container.classList.remove("open");
+                body.style.overflow = ''; // เปิดการเลื่อน
+            });
+        });
+    </script>
+</body>
+</html>
